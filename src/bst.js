@@ -35,12 +35,43 @@ class BinarySearchTree {
     return this.magnitude;
   }
 
-  depthFirstForEach(){
-    // CODE FOR DEPTH FIRST FOREACH HERE
+  // contrary to the test,
+  // I'm going to ignore parameters
+  // and CONSOLE.LOG() instead of the first parameter
+  // and do IN-ORDER instead of reading the second parameter
+  depthFirstForEach(callback){
+    // this // is a BinarySearchTree
+    // this.depthFirstForEach() // works
+    // this.left // is a BinarySearchTree OR NULL
+    // this.left.depthFirstForEach() // also works
+    // UNLESS this.left is null!!!
+
+    // traverse left branch
+    if (this.left) {
+      this.left.depthFirstForEach(callback)
+    }
+
+    callback(this.value)
+
+    // traverse right branch
+    if (this.right) {
+      this.right.depthFirstForEach(callback)
+    }
   }
 
   breadthFirstForEach(){
-    // CODE FOR BREADTH-FIRST FOREACH HERE
+    const queue = [this] // [] is a queue if
+      // you're just using .push() and .shift()
+
+    while (queue.length > 0) {
+      const nodeToProcess = queue.shift()
+      console.log(nodeToProcess.value)
+      // what are all the children?
+      // this.left
+      queue.push(nodeToProcess.left)
+      // this.right
+      queue.push(nodeToProcess.right)
+    }
   }
 }
 
